@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using Microsoft.IdentityModel.Tokens; 
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.ActiveDirectory;
+using Owin;
+
+namespace webApiNetFramework
+{
+    public partial class Startup
+    {
+        // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
+        public void ConfigureAuth(IAppBuilder app)
+        {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            app.UseJwtBearerAuthentication(new Microsoft.Owin.Security.Jwt.JwtBearerAuthenticationOptions
+            {
+                AuthenticationMode = AuthenticationMode.Active,
+
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    RoleClaimType = "roles"
+                }
+            });
+        }
+    }
+}

@@ -16,17 +16,7 @@ namespace webApiNetFramework
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            app.UseJwtBearerAuthentication(new Microsoft.Owin.Security.Jwt.JwtBearerAuthenticationOptions
-            {
-                AuthenticationMode = AuthenticationMode.Active,
-
-                TokenValidationParameters = new TokenValidationParameters
-                {
-                    RoleClaimType = "roles"
-                }
-            });
         }
     }
 }
